@@ -1,0 +1,13 @@
+A generic analysis pipeline that:
+
+1) checks the contents of input and output directories
+2) analyzes new input
+3) supports custom analysis plugins
+
+This needs a lot of work:
+
+1) config files
+2) make package (with setup.py)
+3) unit tests
+4) documentation
+5) define plugin api
