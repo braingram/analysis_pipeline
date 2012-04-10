@@ -30,8 +30,8 @@ OUTPUT_DIR = "./output"
 INPUT_DIR = "./input"
 LOG_FILE = "./log"
 
-logging.basicConfig(level = logging.DEBUG,
-        filename = LOG_FILE, filemode = 'a')
+logging.basicConfig(level=logging.DEBUG,
+        filename=LOG_FILE, filemode='a')
 
 # default plugin options
 DEFAULT_OPTIONS = {}
@@ -46,7 +46,7 @@ for plugin_name in plugin_names:
     plugin = plugins.__dict__[plugin_name]
     if not ('options' in plugin.__dict__.keys()):
         plugin.options = DEFAULT_OPTIONS
-    
+
     if plugin.options.get('private_directory', False):
         plugin_input_directory = '/'.join((INPUT_DIR, plugin_name))
         plugin_output_directory = '/'.join((OUTPUT_DIR, plugin_name))
@@ -71,7 +71,8 @@ for plugin_name in plugin_names:
     # check the validity of the plugin
     if not ('check_result' in plugin.__dict__.keys()):
         raise IOError(\
-                'Plugin %s does not contain the required check_result function'\
+                'Plugin %s does not contain the required ' \
+                'check_result function'\
                 % plugin_name)
     if not ('analyze' in plugin.__dict__.keys()):
         raise IOError(\
@@ -81,14 +82,15 @@ for plugin_name in plugin_names:
     # filter input files by filename
     input_filename_filter = plugin.__dict__.get(\
             'input_filename_filter', lambda x: True)
-    
+
     # check the result of each input file
     for input_filename in os.listdir(plugin_input_directory):
         if not (input_filename_filter(input_filename)):
             # skip files that don't pass the filter
             continue
 
-        real_input_filename = '/'.join((plugin_input_directory,input_filename))
+        real_input_filename = '/'.join( \
+                (plugin_input_directory, input_filename))
         if plugin.check_result(real_input_filename, plugin_output_directory):
             # TODO check return value
             plugin.analyze(real_input_filename, plugin_output_directory)
