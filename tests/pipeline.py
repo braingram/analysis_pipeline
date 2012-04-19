@@ -9,6 +9,7 @@ import cconfig
 
 
 class Debug(object):
+    """done"""
     def __init__(self, **kwargs):
         print "Debug(%s).__init__: %s" % (id(self), kwargs)
 
@@ -20,10 +21,12 @@ class Debug(object):
 
 
 def debug(*args, **kwargs):
+    """done"""
     print "debug: %s %s" % (args, kwargs)
 
 
 def load_operation(cfg, name):
+    """done"""
     if name not in cfg.sections():
         return lambda *args: args, {}
     kwargs = dict([(k, v) for k, v in cfg.items(name) if k[0] != '_'])
