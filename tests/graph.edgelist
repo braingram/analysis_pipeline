@@ -1,0 +1,10 @@
+reader denoise
+denoise filter
+filter detect
+detect extract
+extract split_by_amplitude
+split_by_amplitude cluster
+split_by_amplitude cluster_2
+cluster merge
+cluster_2 merge
+merge save
