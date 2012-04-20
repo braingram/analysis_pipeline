@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import io
+import load
 import movement
 
-__all__ = ['io', 'movement']
+__all__ = ['load', 'movement']

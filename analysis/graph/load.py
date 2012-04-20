@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import io
 import logging
 
 import networkx
@@ -8,7 +9,18 @@ import networkx.readwrite
 from .. import pipeline
 
 
-def load(filename):
+def load(string):
+    if '.edge' in string:
+        return load_from_file(string)
+    else:
+        return load_from_string(string)
+
+
+def load_from_string(string):
+    return load_from_file(io.BytesIO(string))
+
+
+def load_from_file(filename):
     """
     Shortcut function to load a edgelist file describing a pipeline graph
 

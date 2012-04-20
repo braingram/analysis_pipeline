@@ -22,6 +22,10 @@ def load_function(name):
     return load_obj(name)
 
 
+def load_python(name):
+    return eval(name)
+
+
 def load(cfg, name):
     """
     Load a pipeline operation from a config file
@@ -55,6 +59,8 @@ def load(cfg, name):
         return load_class(ovalue, kwargs), kwargs
     elif otype == 'func':
         return load_function(ovalue), kwargs
+    elif otype == 'py':
+        return load_python(ovalue), kwargs
     elif otype == 'clone':
         op, kw = load(cfg, ovalue)
         kw.update(kwargs)

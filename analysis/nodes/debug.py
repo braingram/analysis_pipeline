@@ -30,3 +30,7 @@ def debug(*args, **kwargs):
     using logging.debug
     """
     logging.debug("debug: %s %s" % (args, kwargs))
+
+
+def constant(*args, **kwargs):
+    return kwargs['value']
