@@ -1,13 +1,10 @@
-A generic analysis pipeline that:
+A rewrite of a generic analysis pipeline that:
 
-1) checks the contents of input and output directories
-2) analyzes new input
-3) supports custom analysis plugins
+1) has connectivity defined by a networkx graph
+2) has nodes defined by a cconfig config file
 
-This needs a lot of work:
+needs:
 
-1) config files
-2) make package (with setup.py)
-3) unit tests
-4) documentation
-5) define plugin api
+1) results cascading
+2) easy partial running (for init)
+3) iterative running (for chunks)

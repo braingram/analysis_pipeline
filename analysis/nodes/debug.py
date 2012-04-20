@@ -6,7 +6,7 @@ Useful stuff for debugging graphs
 import logging
 
 
-class DebugClass(object):
+class Debug(object):
     """
     A simple debug class that spits out debugging messages
     using logging.debug when:

@@ -2,6 +2,25 @@
 """
 """
 
+import logging
+
+
+def load_obj(name):
+    if '.' in name:
+        i = name.rfind('.')
+        module = __import__(name[:i], fromlist=('.' in name[:i]))
+        objname = name[i + 1:]
+        return getattr(module, objname)
+    return eval(name)
+
+
+def load_class(name, kwargs):
+    return load_obj(name)(**kwargs)
+
+
+def load_function(name):
+    return load_obj(name)
+
 
 def load(cfg, name):
     """
@@ -33,9 +52,9 @@ def load(cfg, name):
     else:
         otype, ovalue = control[0]
     if otype == 'class':
-        return eval(ovalue)(**kwargs), kwargs
+        return load_class(ovalue, kwargs), kwargs
     elif otype == 'func':
-        return eval(ovalue), kwargs
+        return load_function(ovalue), kwargs
     elif otype == 'clone':
         op, kw = load(cfg, ovalue)
         kw.update(kwargs)
