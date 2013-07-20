@@ -48,7 +48,8 @@ def load(cfg, name):
     """
     if name not in cfg.sections():
         return lambda *args: args, {}
-    kwargs = dict([(k, v) for k, v in cfg.items(name) if k[0] != '_'])
+    kwargs = parse_kwargs(cfg.items(name))
+    #kwargs = dict([(k, v) for k, v in cfg.items(name) if k[0] != '_'])
     control = [(k[1:], v) for k, v in cfg.items(name) if k[0] == '_']
     if len(control) != 1:
         raise ValueError("Invalid control options for %s: %s" % \
@@ -67,6 +68,10 @@ def load(cfg, name):
         return op, kw
     else:
         raise ValueError("Unknown operation def: %s, %s" % (otype, ovalue))
+
+
+def parse_kwargs(items, special='_', ref='$'):
+    return dict([(k, v) for k, v in items if k[0] != special])
 
 
 def parse_node(cfg, node):

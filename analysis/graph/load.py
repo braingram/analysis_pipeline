@@ -57,3 +57,7 @@ def parse_nodes(graph, cfg):
     for node in graph.nodes_iter():
         logging.debug("parsing node: %s" % node)
         graph.node[node] = pipeline.operation.parse_node(cfg, node)
+
+    # connect nodes with references
+    for node in graph.nodes_iter():
+        pass
